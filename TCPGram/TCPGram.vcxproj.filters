@@ -18,19 +18,25 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="example.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClInclude Include="raw_message.h">
+      <Filter>TCPGram</Filter>
+    </ClInclude>
+    <ClInclude Include="datagram.h">
+      <Filter>TCPGram</Filter>
+    </ClInclude>
+    <ClInclude Include="crc32.h">
+      <Filter>TCPGram</Filter>
+    </ClInclude>
+    <ClInclude Include="tcpgram.h">
+      <Filter>TCPGram</Filter>
+    </ClInclude>
+    <ClInclude Include="tcp_server.h">
+      <Filter>TCPGram</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="tcpgram_server.h">
-      <Filter>TCPGram</Filter>
-    </ClInclude>
-    <ClInclude Include="tcpgram_client.h">
-      <Filter>TCPGram</Filter>
-    </ClInclude>
-    <ClInclude Include="netmessage.h">
-      <Filter>TCPGram</Filter>
-    </ClInclude>
+    <ClCompile Include="..\example\example.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

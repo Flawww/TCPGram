@@ -88,6 +88,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\boost_1_72_0</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>-DBOOST_DATE_TIME_NO_LIB -DBOOST_REGEX_NO_LIB</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -102,6 +105,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\boost_1_72_0</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>-DBOOST_DATE_TIME_NO_LIB -DBOOST_REGEX_NO_LIB</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -139,12 +145,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="example.cpp" />
+    <ClInclude Include="crc32.h" />
+    <ClInclude Include="datagram.h" />
+    <ClInclude Include="raw_message.h" />
+    <ClInclude Include="tcpgram.h" />
+    <ClInclude Include="tcp_server.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="netmessage.h" />
-    <ClInclude Include="tcpgram_client.h" />
-    <ClInclude Include="tcpgram_server.h" />
+    <ClCompile Include="..\example\example.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

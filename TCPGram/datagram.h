@@ -37,7 +37,7 @@ struct tcp_datagram {
 	// returns amount of read bytes from buf
 	size_t read_data(uint8_t* buf, size_t len) {
 		auto read_chunk = [&](size_t wanted_total_size) {
-			size_t bytes_to_read = std::min(len, m_data->m_pos - wanted_total_size);
+			size_t bytes_to_read = std::min(len, wanted_total_size - m_data->m_pos);
 			memcpy(m_data->put_raw(bytes_to_read), buf, bytes_to_read);
 			len -= bytes_to_read;
 			buf += bytes_to_read;
@@ -108,9 +108,7 @@ struct tcp_datagram {
 		return initial_max_bytes - max_bytes;
 	}
 
+	bool m_header_ready;
 	message_header m_header;
 	raw_message* m_data;
-
-private:
-	bool m_header_ready;
 };
