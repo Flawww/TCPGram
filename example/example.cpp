@@ -60,14 +60,15 @@ bool read_socket_callback(tcp::socket* sock) {
 
 
 void start_server() {
-	tcp_server server = tcp_server(PORT, accept_client_callback, read_socket_callback);
-	server.run();
+	tcp_server* server = new tcp_server(PORT, accept_client_callback, read_socket_callback);
+	server->run();
+	delete server;
 }
 
 int main()
 {
 	start_server();
-	//start_client(nullptr);
+	//start_client();
 
 	std::getchar();
 	return 0;

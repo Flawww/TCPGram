@@ -3,7 +3,7 @@ TCPGram is a library that offers UDP-like datagrams (individual packets) whilst 
 This lets you do packet-based networking with the reliability that TCP offers without having to implement reliability for UDP.
 
 ## Requirements
-TCPGram requires C++17 or earlier to compile, along with [boost ASIO](https://www.boost.org/doc/libs/1_74_0/doc/html/boost_asio.html)
+TCPGram requires C++11 or later to compile, along with [boost ASIO](https://www.boost.org/doc/libs/1_74_0/doc/html/boost_asio.html)
 It should compile on most platforms without problems.
 
 ## Usage and example

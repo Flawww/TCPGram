@@ -1,11 +1,11 @@
 #pragma once
 #include <deque>
-#include <functional>
 #include <boost/asio.hpp>
 #include <boost/array.hpp>
 #include "datagram.h"
 
 using boost::asio::ip::tcp;
+typedef bool(*proccess_callback_t)(tcp::socket*, raw_message*);
 
 #define MAX_BUFLEN 2048
 #define MAX_LENGTH_PER_SEND 1324
@@ -21,7 +21,7 @@ public:
 	* @param socket the socket we want to use for this instance (used for sending)
 	* @param process_dgram_fn functions that gets called with arguments (socket, buffer, buffer size) when a datagram is fully recieved
 	*/
-	tcpgram(tcp::socket* socket, std::function<bool(tcp::socket*, raw_message*)> process_dgram_fn, size_t max_datagram_size = MAXSIZE_T) {
+	tcpgram(tcp::socket* socket, proccess_callback_t process_dgram_fn, size_t max_datagram_size = MAXSIZE_T) {
 		m_max_datagram_size = max_datagram_size;
 		m_process_dgram_fn = process_dgram_fn;
 		m_datagram_reader = nullptr;
@@ -145,7 +145,7 @@ private:
 	/**
 	* Callback function to process the recieved datagram
 	*/
-	std::function<bool(tcp::socket*, raw_message*)> m_process_dgram_fn;
+	proccess_callback_t m_process_dgram_fn;
 
 	/**
 	* The datagram currently being recieved. Free'd on full recieve

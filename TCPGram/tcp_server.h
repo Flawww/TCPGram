@@ -1,10 +1,10 @@
 #pragma once
-#include <functional>
 #include <vector>
 #include <boost/asio.hpp>
 #include <boost/array.hpp>
 
 using boost::asio::ip::tcp;
+typedef bool(*callback_fn_t)(tcp::socket*);
 
 /**
 * Non-blocking multi-client TCP server
@@ -16,7 +16,7 @@ public:
 	* @param accept_callback callback function that is called when a client is accepted
 	* @param process_socket_callback callback function that is called to recieve data on the socket in question
 	*/
-	tcp_server(int listen_port, std::function<bool(tcp::socket*)> accept_callback, std::function<bool(tcp::socket*)> process_socket_callback) : m_running(true), m_acceptor(tcp::acceptor(m_io_context, tcp::endpoint(tcp::v4(), listen_port))) {
+	tcp_server(int listen_port, callback_fn_t accept_callback, callback_fn_t process_socket_callback) : m_running(true), m_acceptor(tcp::acceptor(m_io_context, tcp::endpoint(tcp::v4(), listen_port))) {
 		m_acceptor.non_blocking(true);
 
 		m_accept_callback = accept_callback;
@@ -131,6 +131,6 @@ private:
 	tcp::acceptor m_acceptor;
 	std::vector<tcp::socket*> m_connected_clients;
 
-	std::function<bool(tcp::socket*)> m_accept_callback;
-	std::function<bool(tcp::socket*)> m_process_socket_callback;
+	callback_fn_t m_accept_callback;
+	callback_fn_t m_process_socket_callback;
 };
